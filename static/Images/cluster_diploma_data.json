@@ -1,0 +1,45 @@
+[
+    {
+        "id": "root",
+        "name": "Institutions",
+        "color": "#004080"
+    },
+    {
+        "id": "FSTS",
+        "parent": "root",
+        "name": "FSTS",
+        "color": "#0066cc"
+    },
+    {
+        "id": "Licence",
+        "parent": "FSTS",
+        "name": "Licence",
+        "color": "#3385ff"
+    },
+    {
+        "id": "Licence GI",
+        "parent": "Licence",
+        "name": "Licence GI",
+        "value": 1,
+        "color": "#66a3ff"
+    },
+    {
+        "id": "UM5",
+        "parent": "root",
+        "name": "UM5",
+        "color": "#0066cc"
+    },
+    {
+        "id": "Master",
+        "parent": "UM5",
+        "name": "Master",
+        "color": "#3385ff"
+    },
+    {
+        "id": "MSID",
+        "parent": "Master",
+        "name": "MSID",
+        "value": 1,
+        "color": "#66a3ff"
+    }
+]

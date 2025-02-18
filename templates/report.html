@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboards</title>
+    <link rel="stylesheet" href="/static/index.css"> 
+    <link rel="icon" href="/static/Images/log9.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome for icons -->
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">
+                    <img src="/static/Images/log9.png" alt="Moroccan Tech Scene Logo" class="logo-img">
+                </a>
+            </div>
+            <ul>
+                <li><strong><a href="/report"><i class="fas fa-chart-line"></i> Report</a></strong></li>
+                <li><strong><a href="/compare2"><i class="fas fa-money-bill-wave"></i> Compare</a></strong></li>
+                <li><strong><a href="/participate"><i class="fas fa-handshake"></i> Participate</a></strong></li>
+            </ul>
+            <button id="darkModeToggle" aria-label="Toggle Dark Mode">
+                <i class="fas fa-moon"></i> 
+            </button>
+        </nav>
+    </header>
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+        <p>Just a moment please</p>
+    </div>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Dashboards</h2>
+            <h4>Overview</h4>
+            <h4 href="Background">Background:Distribution by </h4>
+            <ul>
+                <li><a href="#gender">Gender</a></li>
+                <li><a href="#age">Age Group</a></li>
+                <li><a href="#education">Education Level</a></li>
+                <li><a href="#education2">Type of diploma</a></li>
+                <li><a href="#education3">Diploma/institution</a></li>
+            </ul>
+            <h4 href="distribution">Distribution by</h4>
+            <ul>
+                <li><a href="#job"> Roles</a></li>
+                <li><a href="#Experience">Experience</a></li>
+                <li><a href="#seniority">Seniority</a></li>
+                <li><a href="#tailleC">Company size</a></li>
+                <li><a href="#Secteur">Company's sector</a></li>
+                <li><a href="#Secteur2">Company's sector type</a></li>
+                <li><a href="#nationality">Company nationality</a></li>
+                <li><a href="#companyname">Company name</a></li>
+                <li><a href="#workMode">Work mode</a></li>
+                <li><a href="#language">Programmation languages</a></li>
+                <li><a href="#database">Databases</a></li>
+                <li><a href="#cloud">Cloud services</a></li>
+                <li><a href="#certif">Certifications</a></li>
+                <li><a href="#toolsDaily">Project managment tools</a></li>
+
+            </ul>
+            <h4 href="salary">highest Salary :Based on</h4>
+            <h4 href="satisfaction">Satisfaction</h4>
+            <ul>
+                <li><a href="#satis">Satisfaction of salary by gender </a></li>
+                <li><a href="#satis2">bonues by seniority </a></li>
+
+            </ul>
+        </aside>
+    
+        <main class="content">
+            <section id="Overview" class="intro">
+                <h2 class="marked">Moroccan Tech Scene 2025   </h2>
+                <p  class="stat-highlight animate-float">Overview</p>
+                <p ><strong>This year, we are gathering insights from tech professionals across Morocco to bring transparency to salaries and work conditions in the industry. Your participation is completely anonymous and helps create a clearer picture of the job market.Every response counts! By sharing your experience, you help others make informed career decisions and contribute to a more transparent tech ecosystem in Morocco.💼</strong></p>
+            </section>
+            
+
+            <section  class="charts" id="Background">
+                <h2 class="marked">Background   </h2>
+                <p>This section provides insights into the most common diplomas that lead to employment in the tech sector, highlighting age groups, gender distribution, and the institutions that contribute to the workforce. By exploring these factors, we aim to understand the diversity within the Moroccan tech job market, which can inform educational initiatives, recruitment strategies, and policy-making to foster a more inclusive and dynamic industry.</p>
+                <h2>Distribution by Gender</h2>
+                <div id="gender" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/gender_distribution.html" width="95%" height="800" frameborder="0"></iframe>
+                </div> 
+                <h2>Distribution by Age Group</h2>
+                <div id="age" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/age_distribution.html" width="95%" height="800" frameborder="0"></iframe>
+                </div> 
+                <h2>Distribution by education level</h2>
+                <div id="education" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/diploma_distribution.html" width="95%" height="800" frameborder="0"></iframe>
+                </div> 
+                <h2>Distribution by type of diploma</h2>
+                <div id="education2" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/diploma2_distribution.html" width="95%" height="800" frameborder="0"></iframe>
+                </div> 
+                <h2>Distribution by diploma/institution</h2>
+                <div id="education3" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/cluster_diplomas.html" width="95%" height="800" frameborder="0"></iframe>
+                </div>        
+            </section>
+
+
+
+
+            <section class="charts" id="distribution">
+                <h2 class="marked">Distribution by</h2>
+                <p>This section will make you get into the various aspects of the tech workforce, examining roles, experience levels, and seniority. We’ll also explore company types, sizes, sectors, and nationalities, as well as the tools and technologies that shape the industry. By uncovering these distributions, we aim to provide a clearer picture of the dynamics within the Moroccan tech landscape, empowering stakeholders to make informed decisions.</p>
+                
+                <h2> Role</h2>
+                <div id="role" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/Role_distribution.html" width="95%" height="800" frameborder="0"></iframe>
+                </div> 
+                
+                <h2> Experience</h2>
+                <div id="Experience" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/experience_distribution.html" width="95%" height="800" frameborder="0"></iframe>
+                </div> 
+                
+                <h2> Seniority</h2>
+                <div id="seniority" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/seniority2_distribution.html" width="95%" height="800" frameborder="0"></iframe>
+                </div> 
+                
+                <h2> Sector</h2>
+                <div id="Secteur" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/sector_distribution.html" width="95%" height="800" frameborder="0"></iframe>
+                </div> 
+                
+                <h2>Type of Secteur </h2>
+                <div id="Secteur2" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/sector_distribution_2.html" width="95%" height="800" frameborder="0"></iframe>
+                </div> 
+                
+                <h2>Type of company</h2>
+                <div id="typeC" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/visualize_company_type.html" width="95%" height="800" frameborder="0"></iframe>
+                </div> 
+                
+                <h2>Size of company</h2>
+                <div id="tailleC" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/visualize_company_size.html" width="95%" height="800" frameborder="0"></iframe>
+                </div> 
+                
+                <h2>Company name</h2>
+                <div id="companyName" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/visualize_company_sharing.html" width="95%" height="800" frameborder="0"></iframe>
+                </div> 
+                
+                <h2>Workmode</h2>
+                <div id="workMode" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/visualize_work_mode.html" width="95%" height="800" frameborder="0"></iframe>
+                </div> 
+                
+                <h2>Programmation languages</h2>
+                <div id="language" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/programming_languages_distribution.html" width="95%" height="800" frameborder="0"></iframe>
+                </div> 
+
+                <h2>Certifications/Certificats</h2>
+                <div id="certif" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/certifications_distribution.html" width="95%" height="800" frameborder="0"></iframe>
+                </div> 
+                
+                <h2>Project managment tools</h2>
+                <div id="toolsDaily" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/daily_work_tools_distribution.html" width="95%" height="800" frameborder="0"></iframe>
+                </div>
+                
+                <h2>Cloud services</h2>
+                <div id="cloud" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/cloud_services_usage_distribution.html" width="95%" height="800" frameborder="0"></iframe>
+                </div> 
+                
+                <h2>Databases</h2>
+                <div id="database" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/database_usage_distribution.html" width="95%" height="800" frameborder="0"></iframe>
+                </div>
+            </section>
+
+            <section id="salary" class="charts">
+                <h2>Salary by Features</h2>
+                
+                <div class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/visualize_salary_by_gender.html" width="95%" height="800" frameborder="0"></iframe>
+                </div>
+                
+                <div class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/visualize_salary_by_age.html" width="95%" height="800" frameborder="0"></iframe>
+                </div>
+                
+                <div class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/visualize_salary_by_diploma.html" width="95%" height="800" frameborder="0"></iframe>
+                </div>
+                
+                <div class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/visualize_salary_by_experience.html" width="95%" height="800" frameborder="0"></iframe>
+                </div>
+        
+                <div class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/visualize_salary_by_role.html" width="95%" height="800" frameborder="0"></iframe>
+                </div>
+                
+                <div class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/visualize_salary_by_company_type.html" width="95%" height="800" frameborder="0"></iframe>
+                </div>
+            </section>
+
+
+            <section id="satisfaction" class="charts">
+                <h2>level of satisfaction of salary by gender </h2>
+                <div id="" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/salary_satisfaction_by_gender.html" width="95%" height="800" frameborder="0"></iframe>
+                </div> 
+                <h2>Bonues per level of seniority </h2>
+                <div id="" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                    <iframe src="static/images/bonuses_distribution.html" width="95%" height="800" frameborder="0"></iframe>
+                </div> 
+            </section>
+        </main>
+    </div>
+
+
+    <footer class="site-footer">
+        <div class="footer-columns">
+            <!-- Contact Form Column -->
+            <div class="footer-col">
+                <h4><i class="fas fa-envelope"></i> Contact Us</h4>
+                <form class="footer-form">
+                    <input type="email" placeholder="Your email" required>
+                    <textarea placeholder="Your message" rows="3"></textarea>
+                    <button type="submit">Send <i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+    
+            <!-- Collaborate Column -->
+            <div class="footer-col">
+                <h4><i class="fas fa-handshake"></i> Collaborate</h4>
+                <a href="https://github.com/ChaymaeMoudnib" class="footer-icon" target="_blank">
+                    <i class="fab fa-github"></i>
+                    <span>View on GitHub</span>
+                </a>
+            </div>
+    
+            <!-- Subscribe Column -->
+            <div class="footer-col">
+                <h4><i class="fas fa-bell"></i> Subscribe</h4>
+                <a href="https://www.linkedin.com/in/moudnib-chaymae-73a849224/" class="footer-icon" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                    <span>Follow on LinkedIn</span>
+                </a>
+            </div>
+        </div>
+    <p>&copy; 2025 Moroccan Tech. All rights reserved.</p>
+</footer>
+<script>
+// Scroll-to-Top Button
+const scrollToTopBtn = document.createElement('button');
+scrollToTopBtn.classList.add('scroll-to-top');
+scrollToTopBtn.innerText = '↑';
+document.body.appendChild(scrollToTopBtn);
+
+window.addEventListener('scroll', () => {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        scrollToTopBtn.style.display = 'block';
+    } else {
+        scrollToTopBtn.style.display = 'none';
+    }
+});
+
+scrollToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+setTimeout(() => {
+    const loadingOverlay = document.getElementById('loading-overlay');
+    if (loadingOverlay) {
+        loadingOverlay.style.display = 'none';
+    }
+}); // Hide after 5 seconds
+
+document.addEventListener("DOMContentLoaded", function () {
+    const toggleButton = document.getElementById("darkModeToggle");
+    const body = document.body;
+    const logo = document.querySelector(".logo-img"); // Select the logo
+
+    // Function to update the logo based on mode
+    function updateLogo() {
+        if (body.classList.contains("dark-mode")) {
+            logo.src = "/static/Images/log9-nobg.png"; // Dark mode logo
+        } else {
+            logo.src = "/static/Images/log9.png"; // Light mode logo
+        }
+    }
+
+    // Load previous mode from localStorage
+    if (localStorage.getItem("darkMode") === "enabled") {
+        body.classList.add("dark-mode");
+        toggleButton.innerHTML = '<i class="fas fa-sun"></i>'; // Change icon to sun ☀️
+        updateLogo(); // Update logo
+    }
+
+    toggleButton.addEventListener("click", function () {
+        body.classList.toggle("dark-mode");
+
+        // Update localStorage, button icon, and logo
+        if (body.classList.contains("dark-mode")) {
+            localStorage.setItem("darkMode", "enabled");
+            toggleButton.innerHTML = '<i class="fas fa-sun"></i>'; // Sun icon
+        } else {
+            localStorage.setItem("darkMode", "disabled");
+            toggleButton.innerHTML = '<i class="fas fa-moon"></i>'; // Moon icon
+        }
+
+        updateLogo(); // Change logo
+    });
+});
+</script>
+<script src="/static/g1.js"></script>
+</body>
+</html>

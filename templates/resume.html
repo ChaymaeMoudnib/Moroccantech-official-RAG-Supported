@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Upload</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        #upload-box { border: 2px dashed #4CAF50; padding: 20px; width: 50%; margin: auto; cursor: pointer; background-color: #f9f9f9; }
+        #resume-text { margin-top: 20px; text-align: left; white-space: pre-wrap; border: 1px solid #ddd; padding: 10px; background: #f4f4f4; max-width: 80%; margin: auto; }
+        #entities { margin-top: 20px; }
+        #entities ul { text-align: left; }
+    </style>
+</head>
+<body>
+
+    <h2>Upload Your Resume</h2>
+    
+    <form id="resumeForm">
+        <div id="upload-box" onclick="document.getElementById('resumeInput').click();">
+            <p>Click to upload PDF</p>
+            <input type="file" id="resumeInput" accept=".pdf" style="display: none;">
+        </div>
+        <button type="submit">Upload</button>
+    </form>
+
+    <h3>Extracted Resume Text:</h3>
+    <div id="resume-text"></div>
+
+    <h3>Extracted Entities:</h3>
+    <div id="entities"></div>
+
+    <script>
+        document.getElementById("resumeForm").addEventListener("submit", async function (event) {
+            event.preventDefault(); // Prevent page reload
+        
+            let fileInput = document.getElementById("resumeInput").files[0];
+        
+            if (!fileInput) {
+                alert("Please select a file!");
+                return;
+            }
+        
+            let formData = new FormData();
+            formData.append("resume", fileInput);
+        
+            try {
+                let response = await fetch("http://127.0.0.1:5002/upload", {
+                    method: "POST",
+                    body: formData
+                });
+        
+                let result = await response.json(); // Parse JSON response
+        
+                if (!response.ok) {
+                    throw new Error(result.error || "Upload failed!");
+                }
+        
+                console.log("Server Response:", result); // Debugging log
+        
+                // Display extracted resume text
+                document.getElementById("resume-text").innerText = result.resume_text;
+
+                // Display extracted entities
+                let entitiesDiv = document.getElementById("entities");
+                let entitiesHTML = "<ul>";
+                for (let category in result.entities) {
+                    entitiesHTML += `<li><strong>${category}:</strong> ${result.entities[category].join(", ")}</li>`;
+                }
+                entitiesHTML += "</ul>";
+                entitiesDiv.innerHTML = entitiesHTML;
+
+            } catch (error) {
+                console.error("Upload Error:", error);
+                alert("Upload Failed! " + error.message);
+            }
+        });
+    </script>
+
+</body>
+</html>

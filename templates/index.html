@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moroccan Tech</title>
+    <link rel="stylesheet" href="/static/index.css"> 
+    <link rel="icon" href="/static/Images/log9.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome for icons -->
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">
+                    <img src="/static/Images/log9.png" alt="Moroccan Tech Scene Logo" class="logo-img">
+                </a>
+            </div>
+            <ul>
+                <li><strong><a href="/report"><i class="fas fa-chart-line"></i> Report</a></strong></li>
+                <li><strong><a href="/compare3"><i class="fas fa-money-bill-wave"></i> Compare</a></strong></li>
+                <li><strong><a href="/participate"><i class="fas fa-handshake"></i> Participate</a></strong></li>
+            </ul>
+            <button id="darkModeToggle" aria-label="Toggle Dark Mode">
+                <i class="fas fa-moon"></i> 
+            </button>
+        </nav>
+    </header>
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+        <p>Just a moment please</p>
+    </div>
+    <main>
+        <section class="intro">
+          <h2>Moroccan's Tech Reality check </h2>
+          <p class="stat-highlight animate-float">💡 For making the the work market transparent and available to everyone</p>
+          <p class="marked"><strong>First to Map Moroccan's Tech Pay Landscape :Navigate Smarter, Earn Fairer 💼</strong></p>
+        </section>
+      
+        <section class="charts">
+            <a href="/report"  class="marked-S">
+          <h2>Engineering Salaries Tracker</h2>
+          <div class="stat-highlight animate-float">
+            📉 discover more about the job market in the report
+          </div>
+          <section id="language" class="charts">
+            <h2>Les languages de programmation les plus utilisée</h2>
+            <div id="" class="iframee" style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+                <iframe src="static/images/programming_languages.html" width="95%" height="800" frameborder="0"></iframe>
+            </div> 
+          </section>
+        </a>
+        </section>
+      
+        <section class="insight">
+            <a href="/compare2"  class="marked-S">
+          <h3>Knowledge is Negotiation Power</h3>
+          <p>Compare your salary with the market range 💰 <a href="Compare.html"  class="marked">HERE </a> </p></a>
+        </section>
+      
+        <section class="participation">
+        <a href="/participate"  class="marked-S">
+          <h3>Shape the Future of Tech</h3>
+          <p>Your contribution creates better standards for everyone,don't hesistate to improve our data quality and accuracy, it will take you only 2-4 minutes📊</p></a>
+          <div class="cta-buttons">
+            <!-- Keep your existing CTA buttons -->
+          </div>
+        </section>
+      </main>
+      <footer class="site-footer">
+        <div class="footer-columns">
+            <!-- Contact Form Column -->
+            <div class="footer-col">
+                <h4><i class="fas fa-envelope"></i> Contact Us</h4>
+                <form action="/contact" method="POST" id="contactForm" class="footer-form">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" autocomplete="name" required><br><br>
+                    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" autocomplete="email" required><br><br>
+                    
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" autocomplete="off" required></textarea><br><br>
+
+                    <button type="submit">Send <i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+            <!-- Success Message Block -->
+            <div id="successMessage" class="message-box-success" style="display:none;">
+                <i class="fa fa-check-circle"></i>
+                <p>Thank you! Your message has been sent successfully. I will get back to you shortly.</p>
+            </div>
+            
+            <!-- Error Message Block -->
+            <div id="errorMessage" class="message-box-error" style="display:none;">
+                <i class="fa fa-times-circle"></i>
+                <p>Oops! Something went wrong. Please try sending your message again later.</p>
+            </div>
+    
+            <!-- Collaborate Column -->
+            <div class="footer-col">
+                <h4><i class="fas fa-handshake"></i> Collaborate</h4>
+                <a href="https://github.com/ChaymaeMoudnib" class="footer-icon" target="_blank">
+                    <i class="fab fa-github"></i>
+                    <span>View on GitHub</span>
+                </a>
+            </div>
+    
+            <!-- Subscribe Column -->
+            <div class="footer-col">
+                <h4><i class="fas fa-bell"></i> Subscribe</h4>
+                <a href="https://www.linkedin.com/in/moudnib-chaymae-73a849224/" class="footer-icon" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                    <span>Follow on LinkedIn</span>
+                </a>
+            </div>
+        </div>
+    <p>&copy; 2025 Moroccan Tech. All rights reserved.</p>
+</footer>
+<script>
+    // Scroll-to-Top Button
+    const scrollToTopBtn = document.createElement('button');
+    scrollToTopBtn.classList.add('scroll-to-top');
+    scrollToTopBtn.innerText = '↑';
+    document.body.appendChild(scrollToTopBtn);
+    
+    window.addEventListener('scroll', () => {
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            scrollToTopBtn.style.display = 'block';
+        } else {
+            scrollToTopBtn.style.display = 'none';
+        }
+    });
+    
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    setTimeout(() => {
+        const loadingOverlay = document.getElementById('loading-overlay');
+        if (loadingOverlay) {
+            loadingOverlay.style.display = 'none';
+        }
+    }, 5000); // Hide after 5 seconds
+    
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggleButton = document.getElementById("darkModeToggle");
+        const body = document.body;
+        const logo = document.querySelector(".logo-img"); // Select the logo
+    
+        // Function to update the logo based on mode
+        function updateLogo() {
+            if (body.classList.contains("dark-mode")) {
+                logo.src = "/static/Images/log9-nobg.png"; // Dark mode logo
+            } else {
+                logo.src = "/static/Images/log9.png"; // Light mode logo
+            }
+        }
+    
+        // Load previous mode from localStorage
+        if (localStorage.getItem("darkMode") === "enabled") {
+            body.classList.add("dark-mode");
+            toggleButton.innerHTML = '<i class="fas fa-sun"></i>'; // Change icon to sun ☀️
+            updateLogo(); // Update logo
+        }
+    
+        toggleButton.addEventListener("click", function () {
+            body.classList.toggle("dark-mode");
+    
+            // Update localStorage, button icon, and logo
+            if (body.classList.contains("dark-mode")) {
+                localStorage.setItem("darkMode", "enabled");
+                toggleButton.innerHTML = '<i class="fas fa-sun"></i>'; // Sun icon
+            } else {
+                localStorage.setItem("darkMode", "disabled");
+                toggleButton.innerHTML = '<i class="fas fa-moon"></i>'; // Moon icon
+            }
+    
+            updateLogo(); // Change logo
+        });
+    });
+    </script>
+<script src="/static/g1.js"></script>
+</body>
+</html>

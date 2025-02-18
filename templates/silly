@@ -1,0 +1,26 @@
+ 'Quel est votre genre ? ': '',
+   "Quelle est votre tranche d'âge ?": '',
+   'Quel est votre plus haut niveau de diplôme ?  ': '', 
+   'Avez-vous un diplôme en informatique ou dans un domaine connexe ?': '',
+   'Quel est votre poste actuel ? (Sélectionner dans la liste ou choisir "Autre")': '',
+   "Années d'expérience dans le domaine tech :  ": '',
+   'Quel est votre niveau de séniorité ?': '',
+   '  Dans quel secteur travaillez-vous ?  ': '',
+   'Votre mode de travail :': '',
+   'Travaillez-vous pour une entreprise locale ou internationale ?': '',
+   'Souhaitez-vous partager le nom de votre entreprise ? (Facultatif )': '',
+   'Quel est votre salaire brut mensuel en dirhams (MAD) ?': '',
+   'Quels langages de programmation utilisez-vous le plus ? (Sélection multiple possible)': '',
+   'Quels outils utilisez-vous dans votre travail quotidien ? (Sélection multiple possible)': '',
+   '  Êtes-vous satisfait de votre salaire actuel ?': '',
+   '  À quelle fréquence recevez-vous des primes ou des bonus ?  ': '',
+   'Le salaire exactement en (MAD)?  (Facultatif )': '',
+   'Quels services cloud utilisez-vous le plus?  (Sélection multiple possible)': '',
+   'Dans quel secteur travaillez-vous 2 ? ': '',
+   'Quelle est la taille de votre entreprise ?': '',
+   'Quels base de données utilisez-vous le plus?  (Sélection multiple possible)': '',
+
+
+   ,visualize_age,visualize_diploma,visualize_work_tools,visualize_experience,visualize_seniorit,visualize_role,vis_secteur,vis_secteur2,visualize_work_mode,visualize_company_type,visualize_programming_languages,visualize_satisfaction,visualize_bonuses,visualize_cloud_services,visualize_company_sharing,visualize_company_scope,visualize_databases
+   
+

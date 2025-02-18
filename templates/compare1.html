@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare</title>
+    <link rel="stylesheet" href="/static/index.css"> 
+    <link rel="icon" href="/static/Images/log9.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .container {
+            width: 80%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .charts {
+            margin-bottom: 40px; /* Reduced margin between charts section and the next section */
+        }
+        h1 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            margin-top: 20px; /* Adjust if needed */
+            text-align: center;
+        }
+        #twins {
+            margin-top: 0; /* Ensure no extra top margin in twins section */
+        }
+    
+        form {
+            background: #f5f7fd;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        .form-group {
+            margin-bottom: 20px;
+        }
+    
+        label {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    
+        select, input {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+    
+        .submit {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+    
+        .submit:hover {
+            background:rgb(50, 52, 156);
+        }
+    
+        .message-box {
+            margin-top: 20px;
+            padding: 20px;
+            background: #eaf2ff;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+    
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+    
+            h1 {
+                font-size: 1.8rem;
+            }
+    
+            form {
+                padding: 20px;
+            }
+    
+            .submit {
+                font-size: 1.1rem;
+            }
+        }
+        #darkModeToggle{
+            padding: 5px 10px;
+          }
+        .iframe-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px; /* Space between iframes */
+            flex-wrap: wrap; /* Ensures responsiveness on small screens */
+            margin: 20px 0 0;
+        }
+    
+        .iframe-wrapper {
+            width: 45%; /* Makes them smaller */
+            text-align: center;
+        }
+    
+        .iframe-wrapper iframe {
+            width: 100%;
+            border-radius: 10px;
+        }
+    
+        @media (max-width: 768px) {
+            .iframe-container {
+                flex-direction: column;
+                align-items: center;
+            }
+    
+            .iframe-wrapper {
+                width: 90%; /* Make full width on smaller screens */
+            }
+        }
+        .custom-select {
+            position: relative;
+            width: 100%;
+        }
+
+        .custom-select select {
+            appearance: none; /* Removes default styles */
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .custom-select::after {
+            content: "\f078"; /* FontAwesome down arrow */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #007bff;
+            pointer-events: none;
+        }
+
+        .custom-option {
+            display: flex;
+            align-items: center;
+        }
+
+        .custom-option i {
+            color: #007bff; /* Blue color */
+            margin-right: 10px;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">
+                    <img src="/static/Images/log9.png" alt="Moroccan Tech Scene Logo" class="logo-img">
+                </a>
+            </div>
+            <ul>
+                <li><strong><a href="/report"><i class="fas fa-chart-line"></i> Report</a></strong></li>
+                <li><strong><a href="/compare2"><i class="fas fa-money-bill-wave"></i> Compare</a></strong></li>
+                <li><strong><a href="/participate"><i class="fas fa-handshake"></i> Participate</a></strong></li>
+            </ul>
+            <div>
+            <button id="darkModeToggle" aria-label="Toggle Dark Mode">
+                <i class="fas fa-moon"></i> 
+            </button>
+        </nav>
+    </header>
+    <div class="container">
+        <section  cid="satis" class="charts">
+            <h1>Comparer votre salaire</h1>
+        <form id="salary-form">
+            <div class="form-group">
+                <label for="role">Choisissez votre poste :</label>
+                <select id="role" name="role" required>
+                    <option value="Développeur Backend" data-icon="fa-code"><i class="fa fa-code"></i> Développeur Backend</option>
+                    <option value="Développeur Frontend" data-icon="fa-laptop-code"><i class="fa fa-laptop-code"></i> Développeur Frontend</option>
+                    <option value="Développeur Fullstack" data-icon="fa-code-branch"><i class="fa fa-code-branch"></i> Développeur Fullstack</option>
+                    <option value="Data Scientist" data-icon="fa-chart-line"><i class="fa fa-chart-line"></i> Data Scientist</option>
+                    <option value="Data Engineer" data-icon="fa-database"><i class="fa fa-database"></i> Data Engineer</option>
+                    <option value="DevOps" data-icon="fa-cogs"><i class="fa fa-cogs"></i> DevOps</option>
+                    <option value="Chef de projet IT" data-icon="fa-project-diagram"><i class="fa fa-project-diagram"></i> Chef de projet IT</option>
+                    <option value="Manager IT" data-icon="fa-users-cog"><i class="fa fa-users-cog"></i> Manager IT</option>
+                    <option value="Analyste de données" data-icon="fa-search"><i class="fa fa-search"></i> Analyste de données</option>
+                    <option value="UX/UI Designer" data-icon="fa-paint-brush"><i class="fa fa-paint-brush"></i> UX/UI Designer</option>
+                    <option value="Cybersecurity" data-icon="fa-shield-alt"><i class="fa fa-shield-alt"></i> Cybersecurity</option>
+                    <option value="Professeur" data-icon="fa-chalkboard-teacher"><i class="fa fa-chalkboard-teacher"></i> Professeur</option>
+                </select>
+            </div>
+    
+            <div class="form-group">
+                <label for="salary">Votre salaire (en dirhams) :</label>
+                <input type="number" id="salary" name="salary" required placeholder="Entrez votre salaire">
+            </div>
+    
+            <button type="submit" class="submit">Comparer le salaire</button>
+        </form>
+    
+
+        <div id="result" class="message-box" style="display: none;">
+            <div id="comparison-result"></div> <!-- Ensure this element exists -->
+        </div>
+    </div>
+    </section>
+    <section id="twins" >
+        <h2>Level of Satisfaction of Salary by Gender & Bonuses per Seniority</h2>
+        <div class="iframe-container">
+            <div id="gender-chart" class="iframe-wrapper">
+                <h3>Satisfaction by Gender</h3>
+                <iframe src="static/images/role_gender_comparison.html" width="100%" height="300" frameborder="0"></iframe>
+            </div>
+            <div id="salary-chart" class="iframe-wrapper">
+                <h3>Bonuses per Seniority</h3>
+                <iframe src="static/images/role_salary_distribution.html" width="100%" height="300" frameborder="0"></iframe>
+            </div>
+        </div>
+    </section>
+    </div>
+
+    
+    <footer class="site-footer">
+        <div class="footer-columns">
+            <!-- Contact Form Column -->
+            <div class="footer-col">
+                <h4><i class="fas fa-envelope"></i> Contact Us</h4>
+                <form class="footer-form">
+                    <input type="email" placeholder="Your email" required>
+                    <textarea placeholder="Your message" rows="3"></textarea>
+                    <button type="submit">Send <i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+    
+            <!-- Collaborate Column -->
+            <div class="footer-col">
+                <h4><i class="fas fa-handshake"></i> Collaborate</h4>
+                <a href="https://github.com/ChaymaeMoudnib" class="footer-icon" target="_blank">
+                    <i class="fab fa-github"></i>
+                    <span>View on GitHub</span>
+                </a>
+            </div>
+    
+            <!-- Subscribe Column -->
+            <div class="footer-col">
+                <h4><i class="fas fa-bell"></i> Subscribe</h4>
+                <a href="https://www.linkedin.com/in/moudnib-chaymae-73a849224/" class="footer-icon" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                    <span>Follow on LinkedIn</span>
+                </a>
+            </div>
+        </div>
+    <p>&copy; 2025 Moroccan Tech. All rights reserved.</p>
+    </footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script>
+    document.getElementById("salary-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const role = document.getElementById("role").value;
+        const salary = document.getElementById("salary").value;
+        const formData = new FormData();
+        formData.append("role", role);
+        formData.append("salary", salary);
+    
+        fetch("/compare_salary", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); 
+        })
+        .then(data => {
+            console.log(data); 
+            const resultDiv = document.getElementById("result");
+            const resultText = document.getElementById("comparison-result");
+            resultDiv.style.display = "block";
+    
+            if (data.error) {
+                resultText.textContent = "❌ " + data.error; // Adding Error Emoji
+                resultDiv.classList.add("error-box");
+            } else if (data.result) {
+                resultText.textContent = " " + data.result; // Adding Success Emoji
+                resultDiv.classList.add("success-box");
+                document.getElementById("satis").style.display = "block"; // Show charts section
+                document.getElementById("salary-chart").src = data.chart1 + "?t=" + Date.now();
+        document.getElementById("gender-chart").src = data.chart2 + "?t=" + Date.now();
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            document.getElementById("comparison-result").innerText = "Une erreur s'est produite. Veuillez réessayer.";
+            document.getElementById("result").style.display = "block";
+        });
+    });
+        
+    $(document).ready(function() {
+        $('#role').select2({
+            templateResult: function(data) {
+                if (!data.id) { return data.text; }
+                var $result = $('<span><i class="fa ' + data.element.getAttribute('data-icon') + '"></i> ' + data.text + '</span>');
+                return $result;
+            }
+        });
+    });
+
+    // Scroll-to-Top Button
+const scrollToTopBtn = document.createElement('button');
+scrollToTopBtn.classList.add('scroll-to-top');
+scrollToTopBtn.innerText = '↑';
+document.body.appendChild(scrollToTopBtn);
+
+window.addEventListener('scroll', () => {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        scrollToTopBtn.style.display = 'block';
+    } else {
+        scrollToTopBtn.style.display = 'none';
+    }
+});
+
+scrollToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+setTimeout(() => {
+    const loadingOverlay = document.getElementById('loading-overlay');
+    if (loadingOverlay) {
+        loadingOverlay.style.display = 'none';
+    }
+}); // Hide after 5 seconds
+
+document.addEventListener("DOMContentLoaded", function () {
+    const toggleButton = document.getElementById("darkModeToggle");
+    const body = document.body;
+    const logo = document.querySelector(".logo-img"); // Select the logo
+
+    // Function to update the logo based on mode
+    function updateLogo() {
+        if (body.classList.contains("dark-mode")) {
+            logo.src = "/static/Images/log9-nobg.png"; // Dark mode logo
+        } else {
+            logo.src = "/static/Images/log9.png"; // Light mode logo
+        }
+    }
+
+    // Load previous mode from localStorage
+    if (localStorage.getItem("darkMode") === "enabled") {
+        body.classList.add("dark-mode");
+        toggleButton.innerHTML = '<i class="fas fa-sun"></i>'; // Change icon to sun ☀️
+        updateLogo(); // Update logo
+    }
+
+    toggleButton.addEventListener("click", function () {
+        body.classList.toggle("dark-mode");
+
+        // Update localStorage, button icon, and logo
+        if (body.classList.contains("dark-mode")) {
+            localStorage.setItem("darkMode", "enabled");
+            toggleButton.innerHTML = '<i class="fas fa-sun"></i>'; // Sun icon
+        } else {
+            localStorage.setItem("darkMode", "disabled");
+            toggleButton.innerHTML = '<i class="fas fa-moon"></i>'; // Moon icon
+        }
+
+        updateLogo(); // Change logo
+    });
+});
+</script>
+<script src="/static/g1.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+# Ignore .env file
+.env
+*.env
+.vercel
+node_modules
+node_modules
+credentials.json
