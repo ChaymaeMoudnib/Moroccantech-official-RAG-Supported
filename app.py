@@ -27,10 +27,14 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
+# Set the path to the credentials file based on the environment
+if os.getenv('RENDER') is not None:  # This environment variable is set by Render
+    CREDS_FILE = '/etc/secrets/credentials.json'  # Path for Render
+else:
+    CREDS_FILE = 'C:/Users/user/Documents/Projects/MoroccanTech/credentials.json'  # Path for local testing
 
-CREDS_FILE = os.getenv('GOOGLE_CREDENTIALS_PATH','C:/Users/user/Documents/Projects/MoroccanTech/credentials.json')
 if CREDS_FILE is None:
-    raise ValueError("The GOOGLE_CREDENTIALS_PATH environment variable is not set.")
+    raise ValueError("The CREDENTIALS_JSON environment variable is not set.")
 
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 creds = Credentials.from_service_account_file(CREDS_FILE, scopes=SCOPES)
@@ -69,7 +73,6 @@ def get_data():
     return jsonify(df.to_dict(orient='records'))
 
 # print(df)
-
 
 
 visualize_gender(df)
