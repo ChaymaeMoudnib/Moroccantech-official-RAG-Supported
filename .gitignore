@@ -1,6 +1,10 @@
-# Ignore .env file
+
 .env
 *.env
+
+venv/
+*venv/
+
 credentials.json
 .vscode/
 node_modules/

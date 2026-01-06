@@ -1,0 +1,17 @@
+{
+    "instituts": [
+        {
+            "Institut": "Fsts",
+            "Catégorie": "Licence",
+            "Diplôme": "Licence GI ",
+            "Nombre": 1
+        },
+        {
+            "Institut": "Um5",
+            "Catégorie": "Master",
+            "Diplôme": "MSID",
+            "Nombre": 1
+        }
+    ],
+    "title": "📊 Clustering des Diplômes par Institution 🎓"
+}

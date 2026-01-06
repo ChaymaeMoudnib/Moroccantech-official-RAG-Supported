@@ -1,0 +1,28 @@
+{
+    "title": "\ud83d\udcca 2 participants ont choisi leur mode de travail.",
+    "data": [
+        {
+            "Mode de Travail": "En pr\u00e9sentiel",
+            "Nombre": 1,
+            "Pourcentage": 50.0
+        },
+        {
+            "Mode de Travail": "Hybride",
+            "Nombre": 1,
+            "Pourcentage": 50.0
+        },
+        {
+            "Mode de Travail": "En distanciel",
+            "Nombre": 0,
+            "Pourcentage": 0.0
+        }
+    ],
+    "chart_type": "pie",
+    "labels": "Mode de Travail",
+    "values": "Nombre",
+    "colors": [
+        "#A7C7E7",
+        "#B5EAD7",
+        "#FFDAC1"
+    ]
+}

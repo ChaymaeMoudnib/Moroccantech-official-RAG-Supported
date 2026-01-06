@@ -1,0 +1,34 @@
+{
+    "title": "\ud83c\udfe2 2 participants travaillent dans une entreprise de taille \n Petite (1-50 employ\u00e9s).",
+    "data": [
+        {
+            "Taille": "Petite (1-50 employ\u00e9s)",
+            "Nombre": 1,
+            "Pourcentage": 50.0
+        },
+        {
+            "Taille": "Moyenne (51-500 employ\u00e9s)",
+            "Nombre": 1,
+            "Pourcentage": 50.0
+        },
+        {
+            "Taille": "Grande (501-5000 employ\u00e9s)",
+            "Nombre": 0,
+            "Pourcentage": 0.0
+        },
+        {
+            "Taille": "Tr\u00e8s grande (+5000 employ\u00e9s)",
+            "Nombre": 0,
+            "Pourcentage": 0.0
+        }
+    ],
+    "chart_type": "pie",
+    "labels": "Taille",
+    "values": "Pourcentage",
+    "color_map": {
+        "Petite (1-50 employ\u00e9s)": "#A7C7E7",
+        "Moyenne (51-500 employ\u00e9s)": "#B5EAD7",
+        "Grande (501-5000 employ\u00e9s)": "#FFDAC1",
+        "Tr\u00e8s grande (+5000 employ\u00e9s)": "#E2F0CB"
+    }
+}

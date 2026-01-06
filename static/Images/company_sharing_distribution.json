@@ -1,0 +1,22 @@
+{
+    "title": "\ud83d\udcca 2 participants ont partag\u00e9 le nom de leur entreprise.\n",
+    "data": [
+        {
+            "Initial": "I",
+            "Nombre": 2,
+            "Pourcentage": 100.0,
+            "Label": "I (100.0%)"
+        }
+    ],
+    "chart_type": "icicle",
+    "path": [
+        "Label"
+    ],
+    "values": "Nombre",
+    "color_scale": [
+        "#A7C7E7",
+        "#B5EAD7",
+        "#8FD3E2",
+        "#7FC8D6"
+    ]
+}

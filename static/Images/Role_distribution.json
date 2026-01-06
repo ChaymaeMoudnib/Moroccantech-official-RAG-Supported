@@ -1,0 +1,19 @@
+{
+    "title": "\ud83d\udcca La majorit\u00e9 des participants ont le r\u00f4le D\u00e9veloppeur Fullstack avec 1 participants !",
+    "data": [
+        {
+            "Role": "D\u00e9veloppeur Fullstack",
+            "Nombre": 1,
+            "Pourcentage": 50.0
+        },
+        {
+            "Role": "Data Scientist",
+            "Nombre": 1,
+            "Pourcentage": 50.0
+        }
+    ],
+    "chart_type": "bar",
+    "x_axis": "Nombre",
+    "y_axis": "Role",
+    "orientation": "h"
+}

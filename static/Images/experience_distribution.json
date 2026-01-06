@@ -1,0 +1,33 @@
+{
+    "title": "\ud83d\udcbc 1 professionnels ont 0-1 an ans d'exp\u00e9rience dans la tech ! \ud83d\ude80",
+    "data": [
+        {
+            "Exp\u00e9rience": "0-1 an",
+            "Nombre": 1,
+            "Pourcentage": 50.0
+        },
+        {
+            "Exp\u00e9rience": "2-3 ans",
+            "Nombre": 1,
+            "Pourcentage": 50.0
+        },
+        {
+            "Exp\u00e9rience": "4-6 ans",
+            "Nombre": 0,
+            "Pourcentage": 0.0
+        },
+        {
+            "Exp\u00e9rience": "7-10 ans",
+            "Nombre": 0,
+            "Pourcentage": 0.0
+        },
+        {
+            "Exp\u00e9rience": "10 ans et plus",
+            "Nombre": 0,
+            "Pourcentage": 0.0
+        }
+    ],
+    "chart_type": "pie",
+    "labels": "Exp\u00e9rience",
+    "values": "Nombre"
+}

@@ -1,0 +1,22 @@
+{
+    "title": "\ud83c\udf0d 2 professionnels \u00e9voluent dans une entreprise Locale.\n Et vous ? \ud83c\udfe2",
+    "data": [
+        {
+            "Type": "Locale",
+            "Nombre": 1,
+            "Pourcentage": 50.0
+        },
+        {
+            "Type": "Internationale",
+            "Nombre": 1,
+            "Pourcentage": 50.0
+        }
+    ],
+    "chart_type": "pie",
+    "labels": "Type",
+    "values": "Pourcentage",
+    "color_map": {
+        "Locale": "#A7C7E7",
+        "Internationale": "#B5EAD7"
+    }
+}

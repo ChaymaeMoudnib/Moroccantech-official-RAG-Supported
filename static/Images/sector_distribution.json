@@ -1,0 +1,28 @@
+{
+    "title": "\ud83d\udcca R\u00e9partition des secteurs",
+    "data": [
+        {
+            "Secteur": "Public",
+            "Nombre": 1,
+            "Pourcentage": 50.0
+        },
+        {
+            "Secteur": "Prive",
+            "Nombre": 1,
+            "Pourcentage": 50.0
+        },
+        {
+            "Secteur": "Semi-public",
+            "Nombre": 0,
+            "Pourcentage": 0.0
+        },
+        {
+            "Secteur": "Freelance",
+            "Nombre": 0,
+            "Pourcentage": 0.0
+        }
+    ],
+    "chart_type": "bar",
+    "x_axis": "Nombre",
+    "y_axis": "Secteur"
+}

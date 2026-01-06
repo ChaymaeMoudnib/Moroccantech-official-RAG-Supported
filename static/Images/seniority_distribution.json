@@ -1,0 +1,49 @@
+{
+    "title": "\ud83d\udcca R\u00e9partition des niveaux de s\u00e9niorit\u00e9",
+    "data": [
+        {
+            "Niveau de S\u00e9niorit\u00e9": "Stagiaire",
+            "Nombre": 0,
+            "Pourcentage": 0.0
+        },
+        {
+            "Niveau de S\u00e9niorit\u00e9": "Junior",
+            "Nombre": 1,
+            "Pourcentage": 50.0
+        },
+        {
+            "Niveau de S\u00e9niorit\u00e9": "Mid-Level",
+            "Nombre": 1,
+            "Pourcentage": 50.0
+        },
+        {
+            "Niveau de S\u00e9niorit\u00e9": "Senior",
+            "Nombre": 0,
+            "Pourcentage": 0.0
+        },
+        {
+            "Niveau de S\u00e9niorit\u00e9": "Lead",
+            "Nombre": 0,
+            "Pourcentage": 0.0
+        },
+        {
+            "Niveau de S\u00e9niorit\u00e9": "Manager",
+            "Nombre": 0,
+            "Pourcentage": 0.0
+        },
+        {
+            "Niveau de S\u00e9niorit\u00e9": "Directeur / Executive",
+            "Nombre": 0,
+            "Pourcentage": 0.0
+        },
+        {
+            "Niveau de S\u00e9niorit\u00e9": "Autre :",
+            "Nombre": 0,
+            "Pourcentage": 0.0
+        }
+    ],
+    "chart_type": "bar",
+    "x_axis": "Nombre",
+    "y_axis": "Niveau de S\u00e9niorit\u00e9",
+    "orientation": "h"
+}

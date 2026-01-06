@@ -1,14 +1,13 @@
 from flask import Flask, render_template, request,jsonify,redirect, url_for, session
-from part1 import visualize_gender,visualize_age,visualize_diploma,visualize_diploma2,visualize_diploma_clusters
-from part2 import visualize_role,visualize_experience,visualize_cloud_services_usage,visualize_daily_work_tools,visualize_certifications,visualize_database_usage,visualize_work_mode,visualize_programming_languages,visualize_company_name_sharing,visualize_seniorit,visualize_company_size,visualize_company_type,visualize_sectors,visualize_sector_2
-from part3 import visualize_salary_satisfaction_by_gender,visualize_bonus_frequency_by_seniority
-from salary import visualize_salary_by_gender,visualize_salary_by_company_type,visualize_salary_by_work_mode,visualize_salary_by_role,visualize_salary_by_seniority,visualize_salary_by_experience,visualize_salary_by_age,visualize_salary_by_diploma
-# from com import generate_salary_dis_visualizations
+from Features.part1 import visualize_gender,visualize_age,visualize_diploma,visualize_diploma2,visualize_diploma_clusters
+from Features.part2 import visualize_role,visualize_experience,visualize_seniorit,visualize_company_size,visualize_company_type,visualize_sectors,visualize_sector_2,visualize_work_mode
+from Features.part3 import visualize_salary_satisfaction_by_gender,visualize_bonus_frequency_by_seniority
+from Features.part4 import visualize_cloud_services_usage,visualize_daily_work_tools,visualize_certifications,visualize_database_usage,visualize_programming_languages,visualize_company_name_sharing
+
+from Features.salary import visualize_salary_by_gender,visualize_salary_by_company_type,visualize_salary_by_work_mode,visualize_salary_by_role,visualize_salary_by_seniority,visualize_salary_by_experience,visualize_salary_by_age,visualize_salary_by_diploma
 import json
 import os
-# from com import comp_bp
 import gspread
-from resume import save_uploaded_file, extract_text_from_pdf, extract_entities
 from google.oauth2.service_account import Credentials
 import pandas as pd
 from sendgrid import SendGridAPIClient
@@ -27,9 +26,8 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
-# Set the path to the credentials file based on the environment
-if os.getenv('RENDER') is not None:  # This environment variable is set by Render
-    CREDS_FILE = '/etc/secrets/credentials.json'  # Path for Render
+if os.getenv('RENDER') is not None: 
+    CREDS_FILE = '/etc/secrets/credentials.json' 
 else:
     CREDS_FILE = 'C:/Users/user/Documents/Projects/MoroccanTech/credentials.json'  # Path for local testing
 
@@ -59,7 +57,7 @@ def auto_refresh(interval=30):
     while True:
         try:
             df = fetch_latest_data()  
-            # print("✅ Data updated successfully.")
+            print("✅ Data updated successfully.")
         except Exception as e:
             print(f"⚠️ Error updating data: {e}")
         time.sleep(interval)  # Wait before refreshing again
@@ -137,7 +135,9 @@ def par():
 def compare2():
     return render_template("Compare.html")
 # app.register_blueprint(comp_bp)
-
+@app.route("/test")
+def test():
+    return render_template("test.html")
 
 @app.route("/resume")
 def resume():
