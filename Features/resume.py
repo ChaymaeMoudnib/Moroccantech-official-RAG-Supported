@@ -67,9 +67,9 @@ def extract_entities(text):
             extracted_data["certifications"].add(keyword)
 
     for keyword in keywords:
-            for token in doc:
-                if fuzz.partial_ratio(token.text, keyword) >= 80:
-                    if keyword in programming_languages:
+        for token in doc:
+            if fuzz.partial_ratio(token.text, keyword) >= 80:
+                if keyword in programming_languages:
                     extracted_data["programming_languages"].add(keyword)
                 elif keyword in cloud_services:
                     extracted_data["cloud_services"].add(keyword)

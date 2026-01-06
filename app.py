@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request, Form, File, UploadFile, HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from Features.part1 import visualize_gender,visualize_age,visualize_diploma,visualize_diploma2,visualize_diploma_clusters
 from Features.part2 import visualize_role,visualize_experience,visualize_seniorit,visualize_company_size,visualize_company_type,visualize_sectors,visualize_sector_2,visualize_work_mode
 from Features.part3 import visualize_salary_satisfaction_by_gender,visualize_bonus_frequency_by_seniority
@@ -35,6 +36,8 @@ app.add_middleware(
 )
 
 templates = Jinja2Templates(directory="templates")
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 if os.getenv('RENDER') is not None: 
     CREDS_FILE = '/etc/secrets/credentials.json' 
