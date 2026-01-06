@@ -29,7 +29,7 @@ CORS(app)
 if os.getenv('RENDER') is not None: 
     CREDS_FILE = '/etc/secrets/credentials.json' 
 else:
-    CREDS_FILE = 'C:/Users/user/Documents/Projects/MoroccanTech/credentials.json'  # Path for local testing
+    CREDS_FILE = 'C:/Users/user/Documents/Projects/MoroccanTech/credentials.json'
 
 if CREDS_FILE is None:
     raise ValueError("The CREDENTIALS_JSON environment variable is not set.")
@@ -60,7 +60,7 @@ def auto_refresh(interval=30):
             print("✅ Data updated successfully.")
         except Exception as e:
             print(f"⚠️ Error updating data: {e}")
-        time.sleep(interval)  # Wait before refreshing again
+        time.sleep(interval)
 
 thread = threading.Thread(target=auto_refresh, daemon=True)
 thread.start()
@@ -69,8 +69,6 @@ thread.start()
 def get_data():
     """API endpoint to return the latest data."""
     return jsonify(df.to_dict(orient='records'))
-
-# print(df)
 
 
 visualize_gender(df)
@@ -134,7 +132,7 @@ def par():
 @app.route("/compare2")
 def compare2():
     return render_template("Compare.html")
-# app.register_blueprint(comp_bp)
+
 @app.route("/test")
 def test():
     return render_template("test.html")

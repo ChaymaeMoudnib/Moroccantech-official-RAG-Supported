@@ -4,10 +4,8 @@ import spacy
 from spacy.matcher import PhraseMatcher
 from fuzzywuzzy import fuzz
 
-# Initialize spaCy model
 nlp = spacy.load("en_core_web_sm")
 
-# Define skill categories with more terms
 programming_languages = ["python", "r", "java", "c++", "javascript", "sql", "go", "ruby", "html", "css", "php"]
 cloud_services = ["aws", "azure", "google cloud", "ibm cloud", "oracle cloud"]
 databases = ["mysql", "mongodb", "postgresql", "sqlite", "redis"]
@@ -17,7 +15,6 @@ certifications = [
 ]
 keywords = programming_languages + cloud_services + databases + certifications
 
-# Add matcher for exact keyword matches
 matcher = PhraseMatcher(nlp.vocab, attr="LOWER")
 patterns = [nlp.make_doc(keyword) for keyword in keywords]
 matcher.add("TECH_SKILLS", patterns)
@@ -69,11 +66,10 @@ def extract_entities(text):
         elif keyword in certifications:
             extracted_data["certifications"].add(keyword)
 
-    # Fuzzy matching for variations
     for keyword in keywords:
-        for token in doc:
-            if fuzz.partial_ratio(token.text, keyword) >= 80:  # Adjust threshold as needed
-                if keyword in programming_languages:
+            for token in doc:
+                if fuzz.partial_ratio(token.text, keyword) >= 80:
+                    if keyword in programming_languages:
                     extracted_data["programming_languages"].add(keyword)
                 elif keyword in cloud_services:
                     extracted_data["cloud_services"].add(keyword)

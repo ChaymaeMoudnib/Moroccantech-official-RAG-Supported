@@ -6,41 +6,41 @@ import plotly.express as px
 import json
 
 pastel_colors = [
-    "#A7C7E7",  # Baby Blue
-    "#FFC1CC",  # Baby Pink
-    "#C5E1A5",  # Baby Green
-    "#FFEB99",  # Baby Yellow
-    "#FF9999",  # Baby Red
-    "#D1B3FF",   # Baby Purple
-    "#F7C6C7",  # Pastel Coral  
-    "#FFDDC1",  # Pastel Peach  
-    "#B5EAD7",  # Pastel Mint  
-    "#E0BBE4",  # Pastel Lavender  
-    "#FDCB9E",  # Pastel Orange  
-    "#A2D2FF",  # Pastel Sky Blue  
-    "#D4A5A5",  # Pastel Rose  
-    "#BFD8D2",  # Pastel Teal  
-    "#FFE4E1" ,  # Pastel Blush  
-    "#FF5733",  # Bright Red-Orange
-    "#C70039",  # Deep Red
-    "#900C3F",  # Dark Burgundy
-    "#581845",  # Rich Purple
-    "#FFC300",  # Vivid Yellow
-    "#FF5733",  # Fiery Orange
-    "#DAF7A6",  # Neon Green
-    "#33FF57",  # Bright Lime
-    "#28A745",  # Emerald Green
-    "#138D75",  # Deep Teal
-    "#1F618D",  # Royal Blue
-    "#154360",  # Midnight Blue
-    "#8E44AD",  # Amethyst Purple
-    "#D35400",  # Deep Orange
-    "#E74C3C",  # Strong Coral
-    "#3498DB",  # Vibrant Sky Blue
-    "#2ECC71",  # Fresh Green
-    "#F39C12",  # Warm Amber
-    "#9B59B6",  # Grape Purple
-    "#E91E63"   # Hot Pink
+    "#A7C7E7",
+    "#FFC1CC",
+    "#C5E1A5",
+    "#FFEB99",
+    "#FF9999",
+    "#D1B3FF",
+    "#F7C6C7",
+    "#FFDDC1",
+    "#B5EAD7",
+    "#E0BBE4",
+    "#FDCB9E",
+    "#A2D2FF",
+    "#D4A5A5",
+    "#BFD8D2",
+    "#FFE4E1",
+    "#FF5733",
+    "#C70039",
+    "#900C3F",
+    "#581845",
+    "#FFC300",
+    "#FF5733",
+    "#DAF7A6",
+    "#33FF57",
+    "#28A745",
+    "#138D75",
+    "#1F618D",
+    "#154360",
+    "#8E44AD",
+    "#D35400",
+    "#E74C3C",
+    "#3498DB",
+    "#2ECC71",
+    "#F39C12",
+    "#9B59B6",
+    "#E91E63"
 ]
 
 all_roles = [
@@ -64,7 +64,6 @@ def visualize_role(df):
     total_count = counts['Nombre'].sum()
     counts['Pourcentage'] = (counts['Nombre'] / total_count * 100).round(1) if total_count > 0 else 0
 
-    # Prepare data for JSON
     chart_data = {
         "title": f"📊 La majorité des participants ont le rôle {counts.iloc[0, 0]} avec {counts.iloc[0, 1]} participants !" if total_count > 0 else "📊 Aucune donnée disponible",
         "data": counts.to_dict(orient='records'),
@@ -88,7 +87,6 @@ def visualize_experience(df):
     total_count = counts["Nombre"].sum()
     counts["Pourcentage"] = (counts["Nombre"] / total_count * 100).round(1) if total_count > 0 else 0
 
-    # Prepare data for JSON
     chart_data = {
         "title": f"💼 {counts.iloc[0, 1]} professionnels ont {counts.iloc[0, 0]} ans d'expérience dans la tech ! 🚀" if total_count > 0 else "💼 Aucune donnée disponible sur l'expérience.",
         "data": counts.to_dict(orient='records'),
@@ -208,7 +206,7 @@ def visualize_company_type(df):
     company_counts.columns = ['Type', 'Nombre']
     all_types = {'Locale': 0, 'Internationale': 0}
     existing_counts = dict(zip(company_counts['Type'], company_counts['Nombre']))
-    all_types.update(existing_counts)  # Update counts with existing data
+    all_types.update(existing_counts)
     company_counts = pd.DataFrame(list(all_types.items()), columns=['Type', 'Nombre'])
     total_responses = company_counts['Nombre'].sum()
     if total_responses > 0:

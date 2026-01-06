@@ -7,7 +7,6 @@ comp_bp=('compare',__name__)
 
 role_col = 'Quel est votre poste actuel ? (Sélectionner dans la liste ou choisir "Autre")'.strip()
 salary_col = 'Quel est votre salaire brut mensuel en dirhams (MAD) ?'.strip()
-
 # @comp_bp.route('/compare_salary', methods=["POST"])
 # def compare_salary(df):
 #     role = request.form.get("role", "").strip()

@@ -24,10 +24,9 @@ pastel_colors = [
     "#A2D2FF",  # Pastel Sky Blue  
     "#D4A5A5",  # Pastel Rose  
     "#BFD8D2",  # Pastel Teal  
-    "#FFE4E1"   # Pastel Blush  
+    "#FFE4E1"
 ]
 
-# 📌 Gender Distribution (Pie Chart)
 def visualize_gender(df):
     column_name = "Quel est votre genre ? "
     
@@ -141,7 +140,7 @@ def visualize_diploma_clusters(df):
     if diploma_column not in df.columns or highest_degree_column not in df.columns:
         raise ValueError("Required columns not found in DataFrame.")
     diploma_details = df[diploma_column].dropna()
-    diploma_institution = diploma_details.str.rsplit(',', n=1, expand=True)  # Split by LAST comma
+    diploma_institution = diploma_details.str.rsplit(',', n=1, expand=True)
     diploma_institution.columns = ['Diplôme', 'Institut']
     diploma_institution['Institut'] = diploma_institution['Institut'].str.strip().str.title()
     diploma_institution = diploma_institution.dropna(subset=['Institut'])
@@ -165,4 +164,3 @@ def visualize_diploma_clusters(df):
         color_discrete_sequence=px.colors.sequential.Blues[::-1],  
     )
     fig.write_html('static/images/cluster_diplomas.html')
-    # fig.show()
