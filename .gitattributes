@@ -1,0 +1,6 @@
+*.py linguist-detectable=true
+templates/*.html linguist-detectable=true
+static/Images/*.html linguist-generated=true
+static/Images/*.json linguist-generated=true
+*.js linguist-detectable=true
+*.css linguist-detectable=true
