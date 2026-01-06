@@ -1,4 +1,7 @@
-from flask import Flask, render_template, request,jsonify,redirect, url_for, session
+from fastapi import FastAPI, Request, Form, File, UploadFile, HTTPException
+from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.middleware.cors import CORSMiddleware
 from Features.part1 import visualize_gender,visualize_age,visualize_diploma,visualize_diploma2,visualize_diploma_clusters
 from Features.part2 import visualize_role,visualize_experience,visualize_seniorit,visualize_company_size,visualize_company_type,visualize_sectors,visualize_sector_2,visualize_work_mode
 from Features.part3 import visualize_salary_satisfaction_by_gender,visualize_bonus_frequency_by_seniority
@@ -13,23 +16,30 @@ import pandas as pd
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 import re
-from flask_cors import CORS
 from dotenv import load_dotenv
 import threading
 import time
+import hashlib
 from google.oauth2.service_account import Credentials
-
-
 
 load_dotenv()
 
-app = Flask(__name__)
-CORS(app)
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+templates = Jinja2Templates(directory="templates")
 
 if os.getenv('RENDER') is not None: 
     CREDS_FILE = '/etc/secrets/credentials.json' 
 else:
-    CREDS_FILE = 'C:/Users/user/Documents/Projects/MoroccanTech/credentials.json'
+    CREDS_FILE = 'C:/Users/user/OneDrive/Documents/Projects_c/MoroccanTech/credentials.json'
 
 if CREDS_FILE is None:
     raise ValueError("The CREDENTIALS_JSON environment variable is not set.")
@@ -41,7 +51,12 @@ gc = gspread.authorize(creds)
 SHEET_ID = "1RFwkEoUDpQ_rcSaN_n1i6S_UaiSsubakIyUmkLXwdUM"
 WORKSHEET_NAME = "Réponses au formulaire 1"
 
-# ✅ Load initial data before anything else
+CACHE_FILE = 'static/Images/.data_hash.txt'
+
+def get_data_hash(df):
+    """Generate hash of DataFrame to detect changes."""
+    return hashlib.md5(pd.util.hash_pandas_object(df).values.tobytes()).hexdigest()
+
 def fetch_latest_data():
     """Fetch the latest data from Google Sheets."""
     sheet = gc.open_by_key(SHEET_ID)
@@ -49,126 +64,171 @@ def fetch_latest_data():
     data = worksheet.get_all_records()
     return pd.DataFrame(data)  
 
+def generate_all_visualizations(df):
+    """Generate all visualizations - runs in background thread."""
+    try:
+        print(" Starting visualization generation...")
+        visualize_gender(df)
+        visualize_age(df)
+        visualize_diploma(df)
+        visualize_diploma2(df)
+        visualize_diploma_clusters(df)
+        visualize_role(df)
+        visualize_experience(df)
+        visualize_seniorit(df)
+        visualize_sectors(df)
+        visualize_sector_2(df)
+        visualize_work_mode(df)
+        visualize_company_type(df)
+        visualize_company_size(df)
+        visualize_company_name_sharing(df)
+        visualize_programming_languages(df)
+        visualize_database_usage(df)
+        visualize_cloud_services_usage(df)
+        visualize_certifications(df)
+        visualize_daily_work_tools(df)
+        visualize_bonus_frequency_by_seniority(df)
+        visualize_salary_satisfaction_by_gender(df)
+        visualize_salary_by_gender(df)
+        visualize_salary_by_company_type(df)
+        visualize_salary_by_work_mode(df)
+        visualize_salary_by_role(df)
+        visualize_salary_by_diploma(df)
+        visualize_salary_by_seniority(df)
+        visualize_salary_by_experience(df)
+        visualize_salary_by_age(df)
+        
+        os.makedirs(os.path.dirname(CACHE_FILE), exist_ok=True)
+        with open(CACHE_FILE, 'w') as f:
+            f.write(get_data_hash(df))
+        print("All visualizations generated successfully!")
+    except Exception as e:
+        print(f"Error generating visualizations: {e}")
+
+def should_regenerate_visualizations(df):
+    """Check if visualizations need to be regenerated."""
+    current_hash = get_data_hash(df)
+    if not os.path.exists(CACHE_FILE):
+        return True
+    try:
+        with open(CACHE_FILE, 'r') as f:
+            cached_hash = f.read().strip()
+        return cached_hash != current_hash
+    except:
+        return True
+
 df = fetch_latest_data()
 
-def auto_refresh(interval=30):
-    """Refresh the DataFrame every `interval` seconds."""
+def auto_refresh(interval=300):
+    """Refresh data and regenerate visualizations if needed."""
     global df
     while True:
         try:
-            df = fetch_latest_data()  
-            print("✅ Data updated successfully.")
+            new_df = fetch_latest_data()
+            if not df.equals(new_df) or should_regenerate_visualizations(new_df):
+                df = new_df
+                print(" Data changed, regenerating visualizations...")
+                generate_all_visualizations(df)
+            else:
+                df = new_df
+                print(" Data checked, no changes detected.")
         except Exception as e:
-            print(f"⚠️ Error updating data: {e}")
+            print(f"Error updating data: {e}")
         time.sleep(interval)
 
-thread = threading.Thread(target=auto_refresh, daemon=True)
-thread.start()
+if should_regenerate_visualizations(df):
+    print("Generating initial visualizations in background...")
+    viz_thread = threading.Thread(target=generate_all_visualizations, args=(df,), daemon=True)
+    viz_thread.start()
+else:
+    print(" Visualizations are up to date, skipping generation.")
 
-@app.route('/get_data', methods=['GET'])
-def get_data():
+refresh_thread = threading.Thread(target=auto_refresh, daemon=True)
+refresh_thread.start()
+
+@app.get('/get_data')
+async def get_data():
     """API endpoint to return the latest data."""
-    return jsonify(df.to_dict(orient='records'))
+    return df.to_dict(orient='records')
 
+@app.post('/regenerate_viz')
+async def regenerate_viz():
+    """Manually trigger visualization regeneration."""
+    global df
+    try:
+        df = fetch_latest_data()
+        generate_all_visualizations(df)
+        return {'status': 'success', 'message': 'Visualizations regenerated!'}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
-visualize_gender(df)
-visualize_age(df)
-visualize_diploma(df)
-visualize_diploma2(df)
-visualize_diploma_clusters(df)
-
-
-visualize_role(df)
-visualize_experience(df)
-visualize_seniorit(df)
-visualize_sectors(df)
-visualize_sector_2(df)
-visualize_work_mode(df)
-visualize_company_type(df)
-visualize_company_size(df)
-visualize_company_name_sharing(df)
-visualize_programming_languages(df)
-visualize_database_usage(df)
-visualize_cloud_services_usage(df)
-visualize_certifications(df)
-visualize_daily_work_tools(df)
-
-visualize_bonus_frequency_by_seniority(df)
-visualize_salary_satisfaction_by_gender(df)
-
-visualize_salary_by_gender(df)
-visualize_salary_by_company_type(df)
-visualize_salary_by_work_mode(df)
-visualize_salary_by_role(df)
-visualize_salary_by_diploma(df)
-visualize_salary_by_seniority(df)
-visualize_salary_by_experience(df)
-visualize_salary_by_age(df)
-
-# generate_salary_dis_visualizations(df)
-
-@app.route("/report")
-def report():
-    
-    return render_template("report.html")
-
+@app.get("/report", response_class=HTMLResponse)
+async def report(request: Request):
+    return templates.TemplateResponse("report.html", {"request": request})
 
 def is_valid_email(email):
     regex = r'^\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
     return re.match(regex, email)
 
-@app.route('/contact', methods=['POST'])
-def contact():
-    name = request.form.get('name')
-    email = request.form.get('email')
-    message = request.form.get('message')    
-    return jsonify({'status': 'success', 'message': 'Email sent successfully!'})
+@app.post('/contact')
+async def contact(
+    name: str = Form(...),
+    email: str = Form(...),
+    message: str = Form(...)
+):
+    return {'status': 'success', 'message': 'Email sent successfully!'}
     
-@app.route("/participate")
-def par():
-    return render_template("participate.html")
+@app.get("/participate", response_class=HTMLResponse)
+async def par(request: Request):
+    return templates.TemplateResponse("participate.html", {"request": request})
 
+@app.get("/compare2", response_class=HTMLResponse)
+async def compare2(request: Request):
+    return templates.TemplateResponse("Compare.html", {"request": request})
 
-@app.route("/compare2")
-def compare2():
-    return render_template("Compare.html")
+@app.get("/test", response_class=HTMLResponse)
+async def test(request: Request):
+    return templates.TemplateResponse("test.html", {"request": request})
 
-@app.route("/test")
-def test():
-    return render_template("test.html")
+@app.get("/resume", response_class=HTMLResponse)
+async def resume(request: Request):
+    return templates.TemplateResponse("resume.html", {"request": request})
 
-@app.route("/resume")
-def resume():
-    return render_template("resume.html")
+@app.get("/compare3", response_class=HTMLResponse)
+async def compare3(request: Request):
+    return templates.TemplateResponse("compare1.html", {"request": request})
 
-@app.route("/compare3")
-def compare3():
-    return render_template("compare1.html")
-
-
-@app.route('/upload', methods=['POST'])
-def upload_file():
-    if 'resume' not in request.files:
-        return jsonify({"error": "No file part"}), 400
-    file = request.files['resume']
-    if file.filename == '':
-        return jsonify({"error": "No selected file"}), 400
-    file_path = save_uploaded_file(file)
-    if not file_path:
-        return jsonify({"error": "Failed to save the file"}), 500
+@app.post('/upload')
+async def upload_file(file: UploadFile = File(...)):
+    from Features.resume import save_uploaded_file, extract_text_from_pdf, extract_entities
+    if not file.filename:
+        raise HTTPException(status_code=400, detail="No selected file")
+    
+    upload_folder = "uploads"
+    os.makedirs(upload_folder, exist_ok=True)
+    file_path = os.path.join(upload_folder, file.filename)
+    
+    try:
+        with open(file_path, "wb") as buffer:
+            content = await file.read()
+            buffer.write(content)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to save the file: {str(e)}")
+    
     resume_text = extract_text_from_pdf(file_path)
     if not resume_text:
-        return jsonify({"error": "Failed to extract text from the resume"}), 500
+        raise HTTPException(status_code=500, detail="Failed to extract text from the resume")
+    
     extracted_entities = extract_entities(resume_text)
-    return jsonify({
+    return {
         "resume_text": resume_text,
         "entities": extracted_entities
-    })
+    }
 
-@app.route("/")
-def index():
-    return render_template("index.html")
-
+@app.get("/", response_class=HTMLResponse)
+async def index(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8030, debug=True)
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8030)

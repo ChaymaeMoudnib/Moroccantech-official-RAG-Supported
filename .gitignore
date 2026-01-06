@@ -78,3 +78,5 @@ cython_debug/
 
 *.bak
 *.tmp
+
+static/Images/.data_hash.txt
